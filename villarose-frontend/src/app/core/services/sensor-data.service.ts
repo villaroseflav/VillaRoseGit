@@ -13,7 +13,6 @@ export class SensorDataService {
   constructor(private http: HttpClient) { }
 
   getSensorData(): Observable<SensorData[]> {
-    console.log("get data at " + this.apiUrl);
     return this.http.get<SensorData[]>(this.apiUrl).pipe(
       map(data => {
         if (!Array.isArray(data)) return [];

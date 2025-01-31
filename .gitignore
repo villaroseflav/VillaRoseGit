@@ -6,7 +6,7 @@
 
 # back end
 villarose/src/main/resources/application.properties
-villarose/src/main/java/flavion/villarose/repository/DbInit.java
+villarose/src/main/java/flavion/villarose/infrastructure/persistence/DbInit.java
 villarose/mydatabase.db
 villarose/SpringBootMQTTClient-tcp192168142883/
 
