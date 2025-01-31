@@ -1,0 +1,22 @@
+<app-header [title]="'Esp'"></app-header>
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <div class="flex min-h-[100px] flex-col rounded-lg bg-background p-8">
+    <button 
+      class="mb-4 px-4 py-2 bg-blue-500 text-white rounded-md"
+      (click)="createDevice()">
+      Create New Device
+    </button>
+
+    <ng-container *ngIf="espList && espList.length > 0; else noTableError">
+      <app-table [data]="espList"
+      [allHeaders]="['name', 'ip', 'ssid', 'password', 'status']"
+      [icon]="{name: 'pen', color: '#4398d1'}"
+      (iconClicked)="iconClicked($event)"
+      [emptyTableText]="'No devices available'"></app-table><!-- todo emptytabletext replaced by notablerror?-->
+    </ng-container>
+    <ng-template #noTableError>
+        <strong class="text-red-700">No devices found!</strong>
+    </ng-template>
+  </div>
+</div>
+  

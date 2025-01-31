@@ -1,0 +1,17 @@
+// @import 'src/app/scss';
+
+.action-button:active {
+    //background-color: $primary-o1; todo get variable from import scss
+    transition: background-color 0.2s ease-in-out;
+}
+
+.dot {
+    border-radius: 50%;
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+}
+
+.color-tooltip:hover {
+    opacity: 1;
+}

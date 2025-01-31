@@ -1,0 +1,17 @@
+<div class="row mt-5 mb-4 dashboard">
+    <h3 class="text-sm font-semibold">Dashboard</h3>
+    <app-date-filter></app-date-filter>
+    <div *ngIf="isLoading" class="loading-container">
+      <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="!isLoading" class="grid-container">
+    <!-- <div class="grid mt-4 gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5"> -->
+      <!-- <app-bar *ngIf="graphData['humidity']" [data]="graphData['humidity']"></app-bar> 
+      <app-bartwo *ngIf="graphData['temperature']" [data]="graphData['temperature']"></app-bartwo> 
+      <app-donut *ngIf="graphData['pressure']" [data]="graphData['pressure']"></app-donut> 
+      <app-radial *ngIf="graphData['pressure']" [data]="graphData['pressure']"></app-radial>  -->
+      <app-temperature *ngIf="graphData['temperature']" [data]="graphData['temperature'] || []" class="gc" [class]="chartSizes['temperature']"></app-temperature> 
+      <app-progress #progress *ngIf="graphData['humidity']" [data]="graphData['humidity']" class="gc" [class]="chartSizes['humidity']"></app-progress>
+      <app-line #line *ngIf="graphData['distance']" [data]="graphData['distance']" class="gc" [class]="chartSizes['distance']"></app-line>  
+    </div>
+</div>

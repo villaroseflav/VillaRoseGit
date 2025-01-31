@@ -1,0 +1,16 @@
+<!-- weather-dashboard-page.component.html -->
+<!-- <app-data-chart [data]="sensorData"></app-data-chart> -->
+<app-header [title]="'Graphics'"></app-header>
+<div class="row mt-5 mb-4">
+    <h3 class="text-sm font-semibold">Dashboard</h3>
+    <app-date-filter></app-date-filter>
+    <div class="grid mt-4 gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
+      <app-bar #bar class="col-span-3 lg:col-span-2 md:col-span-2"/> 
+      <app-bartwo #bartwo class="xl:col-span-5 lg:col-span-3 md:col-span-2"/> 
+      <app-donut #donut/>
+      <app-radial #radial/><!-- todo every child should update the data on type change (default/average) -->
+      <app-temperature #temperature [type]="eventData" class="xl:col-span-5 lg:col-span-3 md:col-span-3"/>
+      <app-progress #progress class="xl:col-span-2"/>
+      <app-line #line class="xl:col-span-3 lg:col-span-2 md:col-span-2"/>  
+    </div>
+</div>

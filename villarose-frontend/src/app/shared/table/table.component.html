@@ -1,0 +1,62 @@
+<table class="table w-full select-text overflow-hidden">
+  <thead class="select-none border border-[#444444] bg-[#444444] dark:border-gray-700 dark:bg-gray-700">
+    <tr>
+      <th *ngFor="let column of headers"
+      class="cursor-pointer py-3 text-xs uppercase text-white"
+      (click)="onColomnClick($event,column)">{{ column }}
+      <app-icon *ngIf="sortableColumns.includes(column)" [icon]="{'name':'sort' + getSortIcon(column), 'color':'white'}" [size]="'1em'"></app-icon>
+    </th>
+      <th *ngIf="icon.name!==''" class="py-3 text-xs uppercase text-gray-800"></th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-200 border-2 border-t-0 bg-white dark:divide-gray-600 dark:border dark:border-gray-600 dark:bg-transparent">
+    <tr *ngFor="let item of data"
+    class="cursor-auto hover:bg-gray-100 dark:hover:bg-gray-600"
+    (click)="onRowClick(item)"  (mouseover)="onRowHover(true, item)" (mouseleave)="onRowHover(false, item)">
+    <!-- todo cursor-pointer -->
+      <td *ngFor="let column of headers" class="justify-center whitespace-nowrap py-2 text-center dark:text-white">
+        <ng-template [ngIf]="shouldShowText(column, item[column])">
+          <ng-template [ngIf]="isPreOrSuffix(column)">{{ showPrefix(column) }}{{ item[column] }} {{ showSuffix(column) }}</ng-template>
+          <ng-template [ngIf]="!isPreOrSuffix(column)">
+            <ng-container *ngIf="column !== 'password'; else passwordColumn">
+            {{ item[column] }}
+            </ng-container>
+            <ng-template #passwordColumn>
+              <ng-container *ngIf="item[column] && item[column] !== ''">
+              ********
+              </ng-container>
+            </ng-template>
+          </ng-template>
+        </ng-template>
+
+        <ng-template [ngIf]="shouldDisplayColor(column)">
+          <span class="dot relative z-10" [ngStyle]="{
+            'background-color': '#' + item[column]
+          }"
+          data-tooltip-target="tooltip-default"
+          (click)="onColorClick($event,item)"
+          >
+          <span class=" tooltip tooltip-default color-tooltip absolute left-1/2 top-4 -translate-x-1/2 rounded-md bg-slate-500 px-2
+            py-1 text-xs text-white opacity-0"> 
+            
+            #{{item[column]}} </span>
+        </span>
+        </ng-template>
+        <ng-template [ngIf]="shouldDisplayIcon(item[column])">
+          <app-icon [icon]="generateIcon(item[column])" [size]="'1em'"></app-icon>
+        </ng-template>
+        </td>
+        <td *ngIf="icon.name!==''" class="whitespace-nowrap py-2 text-center">
+          <button class="action-button aspect-square p-2" (click)="onIconClick($event,item)"
+            [ngClass]="{'action-button opacity-100': item.hover, 'hover:bg-gray-100 opacity-0': !item.hover}">
+            <app-icon [icon]="{'name':icon.name, 'color':item.hover ? (icon.color? icon.color: 'black') : 'white'}" [size]="'1em'"></app-icon>
+          </button>
+          <button *ngIf="secondaryIcon.name!==''" class="action-button aspect-square p-2" (click)="onSecondaryIconClick($event,item)"
+          [ngClass]="{'action-button opacity-100': item.hover, 'hover:bg-gray-100 opacity-0': !item.hover}">
+          <app-icon [icon]="{'name':secondaryIcon.name, 'color':item.hover ? (secondaryIcon.color? secondaryIcon.color: 'black') : 'white'}" [size]="'1em'"></app-icon>
+        </button>
+        </td>
+    </tr>
+  </tbody>
+  <h1 *ngIf="!data || data == null">{{ emptyTableText }}</h1>
+</table>

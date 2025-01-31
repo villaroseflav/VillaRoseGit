@@ -1,0 +1,22 @@
+<label class="label" for="{{label}}">{{label}}</label>
+<div class="relative">
+    <select
+        id="select-{{label}}"
+        [(ngModel)]="selectedOption"
+        class="inputfield" 
+        name="{{label}}"
+        (ngModelChange)="onSelectedOptionChange($event)"
+        [ngClass]="{'applyDisable': selectedOption === undefined}"
+        required
+        (focus)="isDropdownOpen = true"
+        (blur)="isDropdownOpen = false">
+        <option value="undefined" disabled hidden>{{label}}</option>
+        <option [ngClass]="{'open': isDropdownOpen}" [value]="getOptionKey(option)"
+                *ngFor="let option of options">{{ getOptionValue(option) }}</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 dark:dark:text-gray-300">
+    <app-icon [icon]="{'name': 'chevron-down', 'color': ''}"
+            class="flip text-black"
+            [ngClass]="{ 'flipped': isDropdownOpen}"></app-icon>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<ng-container *ngIf="temperatures && temperatures.length > 0; else noTableError">
+    <app-table [data]="temperatures"
+    [allHeaders]="['date', 'time', 'temperature']"
+    [sortableColumns]="['date', 'time', 'temperature']"
+    [importantHeaders]="['date', 'time', 'temperature']"
+    [suffix]="'temperature:°C'"
+    [emptyTableText]="'No temperatures available'"
+    (headerClicked)="sortTable($event)"></app-table><!-- todo emptytabletext replaced by notablerror?-->
+</ng-container>
+<ng-template #noTableError>
+    <strong class="text-red-700">No temperatures found!</strong>
+</ng-template>
