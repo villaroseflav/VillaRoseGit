@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.7.2</version> <!-- Make sure to use the latest version -->
+			<version>42.2.18</version> <!-- Make sure to use the latest version -->
 		</dependency>
 		<dependency>
 			<groupId>org.xerial</groupId>

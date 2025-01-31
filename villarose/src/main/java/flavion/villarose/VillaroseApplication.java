@@ -19,6 +19,7 @@ public class VillaroseApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		try {
+			System.out.println("NOT STARTING MQTT, FOR TESTING"); //todo
 			mqttService.startMqttClient(); // Start MQTT client and subscribe to topics
 		} catch (Exception e) {
 			//e.printStackTrace();

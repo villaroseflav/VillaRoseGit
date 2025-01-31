@@ -24,6 +24,4 @@ public class SQLiteDialect extends Dialect {
             }
         };
     }
-
-    // Override other necessary methods if needed
 }

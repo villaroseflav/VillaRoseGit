@@ -1,5 +1,6 @@
 package flavion.villarose.application.config;
 
+import jakarta.annotation.PostConstruct;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -24,52 +25,64 @@ public class MqttConfig {
     @Value("${app.mqtt.password}")
     private String mqttPassword;
 
+    private MqttClient mqttClient;
+
     @Bean
-    @Lazy
-    public MqttClient mqttClient() throws MqttException {
-        MqttClient client = null;
+//    @Lazy
+    public MqttClient mqttClient() {
+        return mqttClient;
+    }
 
-        try {
+    @PostConstruct
+    public void initalizeMqttClient() {
+        // tenter de ne pas bloquer le serveur pendant la connexion mqtt
+//        new Thread(() -> {
 
-            // Attempt to connect to the broker
-            client = new MqttClient(BROKER_URL, CLIENT_ID);
+            try {
 
-            // Setup MQTT connection options (username, password, etc.)
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setCleanSession(true); // Keep a clean session
-            options.setUserName(mqttUsername); // Optional: if your MQTT broker requires authentication
-            options.setPassword(mqttPassword.toCharArray()); // Optional
+                // Attempt to connect to the broker
+                mqttClient = new MqttClient(BROKER_URL, CLIENT_ID);
+                // Setup MQTT connection options (username, password, etc.)
+                MqttConnectOptions options = new MqttConnectOptions();
+                options.setCleanSession(true); // Keep a clean session
+                options.setUserName(mqttUsername); // Optional: if your MQTT broker requires authentication
+                options.setPassword(mqttPassword.toCharArray()); // Optional
 
-            int attempts = 0;
-            while (attempts < MAX_RETRIES) {
-                try {
-                    client.connect(options);
-                    System.out.println("Connected to MQTT broker.");
-                    break;
-                } catch (MqttException e) {
-                    attempts++;
-                    System.out.println("Failed to connect. Attempt " + attempts + " of " + MAX_RETRIES);
-                    if (attempts >= MAX_RETRIES) {
-                        System.err.println("Max retry attempts reached. Unable to connect to MQTT broker.");
-                        throw e; // Rethrow exception after max attempts
-                    }
+                int attempts = 0;
+                while (attempts < MAX_RETRIES) {
                     try {
-                        // Wait before retrying
-                        Thread.sleep(RETRY_DELAY);
-                    } catch (InterruptedException interruptedException) {
-                        Thread.currentThread().interrupt(); // Restore the interrupted status
-                        //throw new MqttException(interruptedException);
-                        System.out.println("Interrupted while waiting for MQTT broker.");
+//                        Thread.sleep(5000); //todo try run server before mqtt
+                        mqttClient.connect(options);
+                        System.out.println("Connected to MQTT broker.");
                         break;
+                    } catch (MqttException e) {
+                        attempts++;
+                        System.out.println("Failed to connect. Attempt " + attempts + " of " + MAX_RETRIES);
+                        if (attempts >= MAX_RETRIES) {
+                            System.err.println("Max retry attempts reached. Unable to connect to MQTT broker.");
+                            //throw e; // Rethrow exception after max attempts
+                            return;
+                        }
+                        try {
+                            // Wait before retrying
+                            Thread.sleep(RETRY_DELAY);
+                        } catch (InterruptedException interruptedException) {
+                            Thread.currentThread().interrupt(); // Restore the interrupted status
+                            //throw new MqttException(interruptedException);
+                            System.out.println("Interrupted while waiting for MQTT broker.");
+                            break;
+                        }
+//                    } catch (InterruptedException e) {
+////                    throw new RuntimeException(e);
+//                        System.out.println("Interrupted while waiting for MQTT broker.");
+//                        break;
                     }
                 }
+            } catch (MqttException e) {
+                e.printStackTrace();
+                System.out.println("Failed to connect to MQTT broker.");
             }
-        }
-        catch (MqttException e) {
-            e.printStackTrace();
-            System.out.println("Failed to connect to MQTT broker.");
-        }
-        return client;
+        //}).start();
     }
 
     // Subscribe to a topic
@@ -77,7 +90,12 @@ public class MqttConfig {
         if (client != null) {
             String topic = "sensor/data";
             client.setCallback(new MqttCallbackHandler());
-            client.subscribe(topic, 1);
+            try {
+                client.subscribe(topic, 1);
+            } catch (MqttException e) {
+                e.printStackTrace();
+                System.out.println("Subscribing to topic " + topic + " failed.");
+            }
         } else {
             System.out.println("No MQTT client available to subscribe to the topic.");
         }

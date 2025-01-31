@@ -16,7 +16,7 @@ public class MqttService {
     private MqttConfig mqttConfig;
 
     public void startMqttClient() {
-        if (mqttClient == null) {
+        if (mqttClient == null || !mqttClient.isConnected()) {
             System.out.println("Mqtt client not available. Skipping setup");
             return;
         }
@@ -36,5 +36,9 @@ public class MqttService {
         } else {
             System.out.println("MQTT Client not available.");
         }
+    }
+
+    public boolean isMqttClientReady() {
+        return mqttClient != null && mqttClient.isConnected();
     }
 }

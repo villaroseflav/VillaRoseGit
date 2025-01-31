@@ -8,6 +8,7 @@
 villarose/src/main/resources/application.properties
 villarose/src/main/java/flavion/villarose/infrastructure/persistence/DbInit.java
 villarose/mydatabase.db
+villarose/mydatabase.db-journal
 villarose/SpringBootMQTTClient-tcp192168142883/
 
 # doc

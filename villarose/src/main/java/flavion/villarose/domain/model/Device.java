@@ -12,31 +12,32 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+//@Table(name = "device")
 public class Device {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+//    @Column(name = "name")
     private String name;
 
-    @Column(name = "token")
+//    @Column(name = "token")
     private String token;
 
-    @Column(name = "domain")
+//    @Column(name = "domain")
     private String domain;
 
-    @Column(name = "endpoint")
+//    @Column(name = "endpoint")
     private String endpoint;
 
-    @Column(name = "ssid")
+//    @Column(name = "ssid")
     private String ssid;
 
-    @Column(name = "password")
+//    @Column(name = "password")
     private String password;
 
-    @Column(name = "status")
+//    @Column(name = "status")
     private int status;
 
     @OneToMany(mappedBy = "device", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

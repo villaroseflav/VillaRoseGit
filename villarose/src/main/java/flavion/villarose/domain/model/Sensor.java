@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+//@Table(name = "sensor")
 public class Sensor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
