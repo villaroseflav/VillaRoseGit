@@ -1,0 +1,74 @@
+		  ------- ESP
+		  |
+FRONTEND ------ BACKEND ------ TUYA PY
+		  |		 |
+		 DB		Smart plug
+
+ESP - RASPBERRY (BACKEND)
+
+BE utilise webclient pour envoyer vers le webserver de esp,
+	controller pour recevoir des messages
+esp utilise un webserver pour recevoir des messages,
+	http pour envoyer des messages
+
+connecter nouveau esp
+good:
+- esp se connecte au wifi
+- envoie un register request au raspbi
+bad but possible:
+- esp n'arrives pas à se connecter au wifi
+- on sait qu'il y a un esp mais il n'envoit pas de ping ou request
+- esp démarre un soft access point
+- via raspbi --> aller vers IP accesspoint (hardcoded name, passw, ip) --> retenter connex wifi
+
+idéal:
+BE connaît le domaine de chaque esp
+il envoie un message a l'esp
+
+(actuel)
+esp envoit un message avec API KEY
+BE vérifie le KEY et génère un HASH pour l'esp. Hash enregistré dans db et envoyé a esp
+esp sauve le hash token et l'utilise dans ses appels
+
+ENVOIE DATA
+si tout va bien -> envoie chaque 15 minutes
+si rate -> réessaye chaque minute
+
+data contient: sensor name, location, token, time, date, sensor data
+
+
+BACKEND - FRONTEND
+
+http entre spring et angular
+
+BACKEND - TUYA PY
+
+backend communique avec api tuya pour allumer et éteindre
+
+TUYA PY -> Smart Plug
+
+TODO -----------
+
+sécuriser: 
+- data sending failure
+esp sauve les données qu'il arrive a lire mais pas envoyer
+ping regulier
+quand communication rétablie --> envoyer les données
+
+- esp hors connexion
+BE ping régulièrement --> après longtemps, envoyer un mail pour demander de rallumer l'esp
+
+- esp bug
+BE peut envoyer un reset --> ESP force un redémarrage
+
+DIFFICILE
+esp doit pouvoir être redémarré et fonctionner:
+- demander token a nouveau
+- heure correcte
+- connexion wifi et tout
+- instaurer securite
+	BE sauve esp dans db avec token, si connect failure --> supprimer token et attendre nouveau
+	esp demande un token, si réponse token invalid --> handshake to get new token
+
+- XSS
+- SQL Injection
