@@ -1,0 +1,30 @@
+<app-toast></app-toast>
+<!-- 
+<header class="header" id="header">
+  <app-header/>
+  <app-banner/>
+</header> -->
+
+
+<div class="flex h-screen w-full overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  
+  <div class="flex grow flex-col content-start overflow-hidden bg-card">
+    <!-- Header -->
+    <app-navbar></app-navbar>
+    <!-- main content -->
+    <div id="main-content" class="main pb-5 pt-5 scrollbar-thumb-rounded scrollbar-track-rounded grow overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-muted"
+     [ngClass]="{'screen-large': largeScreen}">
+     <div class="mx-auto px-4 py-4 sm:px-6">
+      <router-outlet></router-outlet>
+     </div>
+    </div>
+
+    <!-- footer -->
+    <app-footer></app-footer>
+
+    <!-- Bottom bar -->
+    <!-- <app-bottom-navbar></app-bottom-navbar> -->
+  </div>
+</div>

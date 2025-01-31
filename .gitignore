@@ -7,6 +7,8 @@
 # back end
 villarose/src/main/resources/application.properties
 villarose/src/main/java/flavion/villarose/repository/DbInit.java
+villarose/mydatabase.db
+villarose/SpringBootMQTTClient-tcp192168142883/
 
 # doc
 RASPBI_SETUP.txt

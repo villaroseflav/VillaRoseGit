@@ -1,0 +1,19 @@
+//@import 'src/app/scss';
+.inputfield.applyDisable {
+    @apply text-gray-400;
+}
+
+option.light-mode {
+    color: black;
+}
+.flip {
+    transition: transform 0.3s ease-in-out;
+}
+
+.flip.flipped {
+    transform: rotate(-180deg) translate(0%, 0%);
+}
+
+.relative select {
+    background-image: none !important;
+}

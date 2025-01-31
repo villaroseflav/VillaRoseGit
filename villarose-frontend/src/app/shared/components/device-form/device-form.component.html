@@ -1,0 +1,14 @@
+<!-- add-device-form.component.html -->
+<form (ngSubmit)="addDevice()">
+    <label for="name">Device Name:</label>
+    <input id="name" [(ngModel)]="device.name" name="name" required />
+  
+    <label for="location">Device Location:</label>
+    <input id="location" [(ngModel)]="device.location" name="location" required />
+  
+    <label for="type">Device Type:</label>
+    <input id="type" [(ngModel)]="device.type" name="type" required />
+  
+    <button type="submit">Add Device</button>
+  </form>
+  

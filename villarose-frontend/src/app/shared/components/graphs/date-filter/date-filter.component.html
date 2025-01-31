@@ -1,0 +1,63 @@
+<div class="flex flex-grow flex-col rounded-lg bg-background bg-contain bg-right-top bg-no-repeat p-10">
+    <div class="flex flex-col justify-between">
+        <div class="mb-4 pt-0 sm:mb-4">
+            <span class="fs-4 d-block lh-0 font-semibold">Temperature</span>
+            <div class="mt-4 flex items-center gap-2">
+                <form [formGroup]="formGroup" class="flex items-center gap-2">
+                    <div class="flex items-center gap-2">
+                        <app-dropdown-select [label]="'Period'" [options]="[
+                                                            { id: 'day', name: 'Day' },
+                                                            { id: 'week', name: 'Week' },
+                                                            { id: 'month', name: 'Month' },
+                                                            { id: 'year', name: 'Year' },
+                                                            { id: 'custom', name: 'Custom Period' }
+                                                            ]" [(selectedOption)]="formGroup.value.periodView"
+                            (selectedOptionChange)="updatePeriod($event)">
+                        </app-dropdown-select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div *ngIf="formGroup.value.periodView === 'custom'">
+                            <!--</div> class="mb-4 w-full md:w-1/4">-->
+                            <label for="from_date" class="label">Start Date</label>
+                            <input type="date" id="from_date" formControlName="from_date" class="inputfield">
+
+                            <label for="to_date" class="label">End Date</label>
+                            <input type="date" id="to_date" formControlName="to_date" class="inputfield">
+                        </div>
+
+                        <div *ngIf="formGroup.get('periodView')?.value !== 'custom' && formGroup.get('periodView')?.value !== 'any'"
+                            class="w-3/4">
+                            <label for="date" class="label">Selected Date</label>
+                            <input type="date" id="date" formControlName="date"
+                                class="inputfield">
+                        </div>
+                        
+                        <!-- <div class="w-full max-w-full md:w-1/2" style="max-width: 100vw">
+                            <label for="graphDropdown" class="label">Graphs</label>
+                            <ngx-select-dropdown id="graphDropdown"
+                                name="graphDropdown" formControlName="graph" [options]="graphOptions"
+                                [config]="graphDropdownConfig" (change)="showGraph()"></ngx-select-dropdown>
+                        </div> -->
+                    </div>
+                    <div *ngIf="formGroup.hasError('customValidation')"
+                        class="mt-2 rounded bg-red-100 p-2 text-red-500 md:hidden">
+                        <p class="text-sm font-bold">{{ formGroup.getError('customValidation')?.message }}</p>
+                    </div><!-- todo class -->
+
+                    <button [disabled]="!formGroup.valid" (click)="search()"
+                        class="btn-confirm self-end px-4 py-2 text-sm font-medium">Search
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <button
+                class="flex items-center gap-1 rounded-md border border-white px-4 py-2.5 text-xs font-semibold">
+                Previous day
+            </button>
+            <button class="flex-none rounded-md border border-white px-4 py-2.5 text-xs font-semibold">
+                Next day
+            </button>
+        </div>
+    </div>
+</div>

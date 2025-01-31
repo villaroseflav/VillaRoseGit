@@ -1,0 +1,21 @@
+<app-header [title]="'Data'"></app-header>
+<div class="mx-auto px-4 py-4 sm:px-8 lg:container">
+  <div *ngIf="isLoading" class="loading-container">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <div *ngIf="!isLoading">
+    <!-- <div nft-dual-card [nft]="nft[0]" class="md:col-span-2"></div>
+    <div nft-single-card [nft]="nft[1]"></div>
+    <div nft-single-card [nft]="nft[2]"></div>
+    <div nft-chart-card class="md:col-span-2 xl:col-span-1"></div>
+    <div nft-auctions-table class="md:col-span-2 xl:col-span-3"></div> -->
+    <app-temp-table [temperatures]="temperatures" (sortingChanged)="updateSort($event)"></app-temp-table>
+  </div>
+
+    <div *ngIf="!isLoading" class="row mt-5 mb-4">
+      <div class="grid mt-4 gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+        <app-temp-table [temperatures]="temperatures" (sortingChanged)="updateSort($event)"></app-temp-table>
+        <app-temp-table [temperatures]="temperatures" (sortingChanged)="updateSort($event)"></app-temp-table>
+      </div>
+  </div>
+</div>

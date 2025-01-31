@@ -1,0 +1,257 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+// $villarose-frontend-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+// $villarose-frontend-primary: (
+//   50: #e3f2fd,
+//   100: #bbdefb,
+//   200: #90caf9,
+//   300: #64b5f6,
+//   400: #42a5f5,
+//   500: #2196f3,  // Main primary color
+//   600: #1e88e5,
+//   700: #1976d2,
+//   800: #1565c0,
+//   900: #0d47a1,
+// );
+
+// $villarose-frontend-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+// $villarose-frontend-accent: (
+//   50: #f8bbd0,
+//   100: #f48fb1,
+//   200: #f06292,
+//   300: #ec407a,
+//   400: #e91e63,  // Main accent color
+//   500: #d81b60,
+//   600: #c2185b,
+//   700: #ad1457,
+//   800: #880e4f,
+//   900: #560027,
+// );
+
+// The warn palette is optional (defaults to red).
+// $villarose-frontend-warn: mat.m2-define-palette(mat.$m2-red-palette);
+// $villarose-frontend-warn: (
+//   50: #ffebee,
+//   100: #ffccd2,
+//   200: #ff9e9d,
+//   300: #ff7075,
+//   400: #ff3d4b,  // Main warn color
+//   500: #f44336,
+//   600: #e53935,
+//   700: #d32f2f,
+//   800: #c62828,
+//   900: #b71c1c,
+// );
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+// $villarose-frontend-theme: mat.define-light-theme((
+//   color: (
+//     primary: $villarose-frontend-primary,
+//     accent: $villarose-frontend-accent,
+//     warn: $villarose-frontend-warn,
+//   ),
+//   typography: mat.define-typography-config(),
+//   density: 0
+// ));
+
+// $villarose-frontend-theme: (
+//   color: (
+//     primary: $villarose-frontend-primary,
+//     accent: $villarose-frontend-accent,
+//     warn: $villarose-frontend-warn,
+//   ),
+// //   typography: mat.define-typography-config(),
+//   typography: mat.m2-define-typography-config(),
+//   density: 0
+// );
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+// @include mat.all-component-themes($villarose-frontend-theme);
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 210 40% 96%;
+    --card-foreground: 240 0% 0%;
+    --primary: 347 77% 50%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 213 27% 84%;
+    --muted-foreground: 215 16% 47%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 32% 91%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 14.9%;
+    --primary: 347 77% 50%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+  }
+
+  :root[data-theme='violet'] {
+    --primary: 262.1 83.3% 57.8%;
+  }
+
+  .dark[data-theme='violet'] {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 20% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+  }
+
+  :root[data-theme='red'] {
+    --primary: 350 100% 40%;
+  }
+
+  .dark[data-theme='red'] {
+    --primary: 350 100% 40%;
+    --primary-foreground: 0 85.7% 97.3%;
+  }
+
+  :root[data-theme='blue'] {
+    --primary: 221.2 83.2% 53.3%;
+  }
+
+  .dark[data-theme='blue'] {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --destructive: 350 100% 40%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+  }
+
+  :root[data-theme='orange'] {
+    --primary: 24.6 95% 53.1%;
+  }
+
+  .dark[data-theme='orange'] {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 24 10% 7%;
+    --card-foreground: 60 9.1% 97.8%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --border: 12 6.5% 15.1%;
+  }
+
+  :root[data-theme='yellow'] {
+    --primary: 47.9 95.8% 53.1%;
+  }
+
+  .dark[data-theme='yellow'] {
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 24 10% 7%;
+    --card-foreground: 60 9.1% 97.8%;
+    --primary: 47.9 95.8% 53.1%;
+    --primary-foreground: 26 83.3% 14.1%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+  }
+
+  :root[data-theme='green'] {
+    --primary: 142.1 76.2% 36.3%;
+  }
+
+  .dark[data-theme='green'] {
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+  }
+
+  [type='text'],
+  [type='email'],
+  [type='url'],
+  [type='password'],
+  [type='number'],
+  [type='date'],
+  [type='datetime-local'],
+  [type='month'],
+  [type='search'],
+  [type='tel'],
+  [type='time'],
+  [type='week'],
+  [multiple],
+  textarea,
+  select {
+    @apply w-full rounded-md border border-border bg-background px-3 py-3 text-xs text-foreground placeholder-muted-foreground focus:z-10 focus:border-primary focus:outline-none focus:ring-primary;
+  }
+
+  [type='checkbox'],
+  [type='radio'] {
+    @apply h-4 w-4 rounded border-border bg-background text-primary focus:ring-2 focus:ring-primary;
+  }
+}
+
+@layer components {
+  .dropdown-content {
+    @apply pointer-events-none scale-95 opacity-0 duration-100 ease-in;
+  }
+
+  .dropdown:hover > .dropdown-content {
+    @apply pointer-events-auto block scale-100 animate-fade-in-up opacity-100 duration-200;
+  }
+}
+
+/** Scroll bar **/
+@supports selector(::-webkit-scrollbar) {
+  .supports-scrollbars\: pr-2 {
+    padding-right: 0.5rem;
+  }
+}
+
+/** Plugins **/
+@import './assets/styles/apexchart.scss';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

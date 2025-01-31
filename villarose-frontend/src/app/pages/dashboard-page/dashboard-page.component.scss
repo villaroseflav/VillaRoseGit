@@ -1,0 +1,31 @@
+.dashboard {
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+      grid-gap: 20px;
+      padding: 20px;
+    }
+
+    .grid-container .gc {
+      margin-bottom: 70px;
+    }
+  
+    /* Styling for large charts */
+    .large {
+      grid-column: span 2; /* Takes up 2 columns */
+      grid-row: span 2;    /* Takes up 2 rows */
+      height: 400px;       /* Larger height */
+    }
+  
+    /* Styling for small charts */
+    .small {
+      grid-column: span 1; /* Takes up 1 column */
+      height: 200px;       /* Smaller height */
+    }
+}
+  
+@media (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: 1fr;
+    }
+}

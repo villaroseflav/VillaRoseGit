@@ -3,7 +3,6 @@ package flavion.villarose.infrastructure.web;
 import flavion.villarose.application.mapper.SensorDataMapper;
 import flavion.villarose.application.service.DataService;
 import flavion.villarose.domain.dto.SensorDataDto;
-import flavion.villarose.domain.model.SensorData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,13 +25,13 @@ public class DataController {
 
     // Endpoint to record sensor data (e.g., temperature, humidity)
     @PostMapping("/{sensorId}/record")
-    public SensorData recordData(@PathVariable Long sensorId, @RequestBody SensorData sensorData) {
-        return dataService.recordSensorData(sensorId, sensorData);
+    public SensorDataDto recordData(@PathVariable Long sensorId, @RequestBody SensorDataDto sensorData) {
+        return SensorDataMapper.toDto(dataService.recordSensorData(sensorId, SensorDataMapper.toEntity(sensorData)));
     }
 
     // Endpoint to fetch sensor data by type (e.g., temperature readings)
     @GetMapping("/{sensorId}/data")
-    public List<SensorData> getSensorDataByType(@PathVariable Long sensorId, @RequestParam String type) {
-        return dataService.getSensorDataByType(sensorId, type);
+    public List<SensorDataDto> getSensorDataByType(@PathVariable Long sensorId, @RequestParam String type) {
+        return SensorDataMapper.toDtos(dataService.getSensorDataByType(sensorId, type));
     }
 }
